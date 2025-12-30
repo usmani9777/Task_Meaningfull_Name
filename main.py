@@ -21,22 +21,24 @@ import uvicorn
 
 app = FastAPI()
 
-app.get('/')
-async def get():
-    return {'Message':'Hello World'}
 
-
-app.get('/users')
+@app.get('/users',status_code=201)
 async def get(Name:str , ID:int =Query(...,gt=0) ):
     try:
-        if len(Name) > 2:
+        if len(Name) < 2:
             raise HTTPException(status_code= 404 , detail= 'Nayal Is Awesome')
         return {'Name':Name , 'ID':ID}
     except HTTPException:
         raise
     except Exception as e:
         raise HTTPException(status_code= 500 , detail=str(e))
-        
+ 
+ 
+@app.get('/')
+async def get():
+    return {'Message':'Hello World'}
+
+       
 if __name__ == "__main__":
     uvicorn.run(app = 'main:app',host = '0.0.0.0' , port = 8000 , reload =True )
 
