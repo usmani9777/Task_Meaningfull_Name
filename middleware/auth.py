@@ -9,6 +9,6 @@ class auth(BaseHTTPMiddleware):
             return response
         api_key = request.headers.get('X-API-KEY')
         if api_key != "NAYALISAWESOME":
-            return JSONResponse(status_code=404 , content='ACCESS FORBIDIN')
+            return JSONResponse(status_code=403 , content='ACCESS FORBIDIN')
         response  = await call_next(request)
         return response
