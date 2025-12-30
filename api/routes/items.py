@@ -13,11 +13,14 @@ async def getItem(ID):
         if ID in item_db.keys():
             return item_db[ID]
         return {}
+
 async def GetItems(item_db) -> list:
     l = []
     for x in item_db.values():
         l.append(x)
     return l
+
+
 ID = 3
 
 @router.get('/GetItemByID',response_model=item_response,status_code=201)
@@ -32,6 +35,7 @@ async def get(ID:int =Query(...,gt=0) ):
         raise
     except Exception as e:
         raise HTTPException(status_code= 500 , detail=str(e))
+    
 @router.get('/GetItemByIDRoute/{ID}',response_model=item_response,status_code=201)
 async def getbyID(ID:int):
     

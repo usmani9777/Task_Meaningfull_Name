@@ -8,9 +8,10 @@ from typing import Optional
 #     price: float = Field(...,ge= 3.0)
 #     tags: list[str] = Field(default=[])
 class item(BaseModel):
-    name: Optional[str] = Field(default="Nayal",min_length=1)
+    name: Optional[str] = Field(default="Nayal",min_length=1,max_length=4000)
     age : int = Field(...,gt= 0)
     Description: str = Field(...,min_length=2 , max_length=100)
     price : float = Field(default=0)
     tags : Optional[list[str]]=  Field(default_factory=list)
+    
     

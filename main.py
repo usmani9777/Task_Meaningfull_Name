@@ -68,7 +68,10 @@ import uvicorn
 from api.routes.user import router as user_route
 from api.routes.items  import router as items_route
 from api.routes.joke import router as joke_route
+from middleware.auth import auth
+
 app = FastAPI()
+app.add_middleware(auth)
 
 app.include_router(user_route)
 app.include_router(items_route)
