@@ -16,31 +16,31 @@
 
 
 
-from fastapi import FastAPI,HTTPException , Query
-import uvicorn
+# from fastapi import FastAPI,HTTPException , Query
+# import uvicorn
 
-app = FastAPI()
+# app = FastAPI()
 
 
-@app.get('/users',status_code=201)
-async def get(Name:str , ID:int =Query(...,gt=0) ):
-    try:
-        if len(Name) < 2:
-            raise HTTPException(status_code= 404 , detail= 'Nayal Is Awesome')
-        return {'Name':Name , 'ID':ID}
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code= 500 , detail=str(e))
+# @app.get('/users',status_code=201)
+# async def get(Name:str , ID:int =Query(...,gt=0) ):
+#     try:
+#         if len(Name) < 2:
+#             raise HTTPException(status_code= 404 , detail= 'Nayal Is Awesome')
+#         return {'Name':Name , 'ID':ID}
+#     except HTTPException:
+#         raise
+#     except Exception as e:
+#         raise HTTPException(status_code= 500 , detail=str(e))
  
  
-@app.get('/')
-async def get():
-    return {'Message':'Hello World'}
+# @app.get('/')
+# async def get():
+#     return {'Message':'Hello World'}
 
        
-if __name__ == "__main__":
-    uvicorn.run(app = 'main:app',host = '0.0.0.0' , port = 8000 , reload =True )
+# if __name__ == "__main__":
+#     uvicorn.run(app = 'main:app',host = '0.0.0.0' , port = 8000 , reload =True )
 
 
 
@@ -60,6 +60,22 @@ if __name__ == "__main__":
 # - At least one example of dependency injection
 
 # You should also organize routes using routers to keep the code modular and readable.
+
+
+
+from fastapi import FastAPI
+import uvicorn
+from api.routes.user import router as user_route
+from api.routes.items  import router as items_route
+app = FastAPI()
+
+app.include_router(user_route)
+app.include_router(items_route)
+   
+if __name__ == "__main__":
+    uvicorn.run(app = 'main:app',host = '0.0.0.0' , port = 8000 , reload =True )
+
+
 
 
 # Commit 3 — External API Integration & Refinement

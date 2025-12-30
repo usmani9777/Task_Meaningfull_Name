@@ -1,8 +1,10 @@
 from fastapi import APIRouter,HTTPException,Query
 
-app = APIRouter(prefix= 'User',tags=['User'])
+router = APIRouter(prefix= '/User',tags=['User'])
 
-@app.get('/users',status_code=201)
+
+
+@router.get('/GetByID',status_code=201)
 async def get(Name:str , ID:int =Query(...,gt=0) ):
     try:
         if len(Name) < 2:
@@ -12,9 +14,7 @@ async def get(Name:str , ID:int =Query(...,gt=0) ):
         raise
     except Exception as e:
         raise HTTPException(status_code= 500 , detail=str(e))
- 
- 
-@app.get('/')
+@router.get('/')
 async def get():
     return {'Message':'Hello World'}
 
