@@ -1,12 +1,21 @@
 import httpx
 from core.config import Setting
 from typing import Dict
+import os
+from dotenv import load_dotenv
 
-URL = Setting()
+# Load variables from .env file
+load_dotenv()
+
+# Access them using os.environ or os.getenv()
+URL = os.getenv('External_Joke_URL')
+
+
+
 
 async def Joke() -> Dict[str, str]:
     try:
-        response = httpx.get(URL.External_Joke_URL, timeout=5.0)
+        response = httpx.get(URL, timeout=5.0)
         response.raise_for_status()
 
         data = response.json()
