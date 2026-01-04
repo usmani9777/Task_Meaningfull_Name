@@ -8,4 +8,4 @@ from typing import Optional
 #     price: float = Field(...,ge= 3.0)
 #     tags: list[str] = Field(default=[])
 class user(BaseModel):
-    prompt: str = Field(...,max_length=40000)
+    prompt: str = Field(..., max_length=100000)

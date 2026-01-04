@@ -24,12 +24,12 @@ async def ChatGPT(Prompt:user) -> Dict:
         global ID
         Prompts['current'] = Prompt.prompt
         response = client.responses.create(
-        input= f'Based on dictionary of previous and new prompts respond to user while cuurent is most recent {Prompts}',
+        input= f'Based on dictionary of previous and new prompts respond to user while cuurent is most recent {Prompts} give the content in .md format so i can show its',
         model="openai/gpt-oss-20b",
         )
         Prompts[ID] = Prompt.prompt
         ID += 1
-        return response
+        return response.output[1]
     except httpx.RequestError as e:
         return {
             "status": "error",
